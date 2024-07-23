@@ -7,12 +7,12 @@ export function App() {
   const [topic, setTopic] = useState('javascript');
   const [questionData, setQuestionData] = useState(null);
 
-  //https://ai-trivia-api-b8b0fddaa26a.herokuapp.com/generate-question
-  //http://localhost:3000/generate-question
+  // PROD: https://ai-trivia-api-b8b0fddaa26a.herokuapp.com/generate-question
+  // DEV: http://localhost:3000/generate-question
 
   const generateQuestion = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/generate-question', { level, topic });
+      const response = await axios.post('https://ai-trivia-api-b8b0fddaa26a.herokuapp.com/generate-question', { level, topic });
       setQuestionData(response.data);
     } catch (error) {
       console.error('Error generating question:', error);
