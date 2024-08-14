@@ -6,17 +6,29 @@ export function App() {
   const [level, setLevel] = useState('easy');
   const [topic, setTopic] = useState('javascript');
   const [questionData, setQuestionData] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [isCorrect, setIsCorrect] = useState(null);
+  const [hasClicked, setHasClicked] = useState(false);
 
-  // PROD: https://ai-trivia-api-b8b0fddaa26a.herokuapp.com/generate-question
-  // DEV: http://localhost:3000/generate-question
-
+  const API_URL = import.meta.env.VITE_API_URL_DEV;
+  //const API_URL = import.meta.env.VITE_API_URL_PROD;
+  
   const generateQuestion = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/generate-question', { level, topic });
+      const response = await axios.post(API_URL, { level, topic });
       setQuestionData(response.data);
+      setSelectedOption(null);
+      setIsCorrect(null);
+      setHasClicked(false);
     } catch (error) {
       console.error('Error generating question:', error);
     }
+  };
+
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
+    setIsCorrect(option === questionData.correctAnswer);
+    setHasClicked(true);
   };
 
   return (
@@ -46,10 +58,19 @@ export function App() {
           <h3>Question: {questionData.question}</h3>
           <ul className="list-group">
             {questionData.options.map((option, index) => (
-              <li key={index} className="list-group-item">{option}</li>
-            ))}
+              <li
+                key={index}
+                className={`list-group-item ${selectedOption === option ? (isCorrect ? 'bg-success text-white' : 'bg-danger text-white') : ''}`}
+                onClick={() => handleOptionClick(option)}
+                style={{ cursor: 'pointer' }}
+                >
+                {option}
+              </li>
+              ))}
           </ul>
-          <p>Correct Answer: {questionData.correctAnswer}</p>
+          {hasClicked && (
+            <p>{isCorrect ? 'Correct Answer!' : `Wrong Answer! Correct Answer is: ${questionData.correctAnswer}`}</p>
+          )}
         </div>
       )}
     </div>
