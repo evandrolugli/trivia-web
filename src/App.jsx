@@ -10,8 +10,8 @@ export function App() {
   const [isCorrect, setIsCorrect] = useState(null);
   const [hasClicked, setHasClicked] = useState(false);
 
-  //const API_URL = import.meta.env.VITE_API_URL_DEV;
-  const API_URL = import.meta.env.VITE_API_URL_PROD;
+  const API_URL = import.meta.env.VITE_API_URL_DEV;
+  //const API_URL = import.meta.env.VITE_API_URL_PROD;
   
   const generateQuestion = async () => {
     try {
