@@ -23,9 +23,9 @@ This app demonstrates API integration, user interaction, and basic state managem
 
 ## Run the App
 ```jsx
-Run the back-end / server project:
+// Run the back-end / server project:
 > npm run dev
 
-# Run the front-end / web project:
+// Run the front-end / web project:
 > npm run dev
 ```
