@@ -22,9 +22,8 @@ This app demonstrates API integration, user interaction, and basic state managem
 ```
 
 ## Run the App
-```jsx
+# Run the back-end / server project:
 > npm run dev
-
-** The server needs to be run for connection with OpenAI API **
-```
+# Run the front-end / web project:
+> npm run dev
 
